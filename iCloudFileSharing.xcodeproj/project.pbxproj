@@ -19,8 +19,8 @@
 		1419AF2614AB183100CBD64B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2514AB183100CBD64B /* DetailViewController.m */; };
 		1419AF2D14AB355700CBD64B /* FileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2C14AB355700CBD64B /* FileInfo.m */; };
 		1419AF3014AB363900CBD64B /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2F14AB363900CBD64B /* FileCell.m */; };
-		14FEB79814AC024C0096174B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB79614AC024C0096174B /* Default.png */; };
-		14FEB79914AC024C0096174B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB79714AC024C0096174B /* Default@2x.png */; };
+		14FEB7AD14AC1EE70096174B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB7AB14AC1EE70096174B /* Default.png */; };
+		14FEB7AE14AC1EE70096174B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB7AC14AC1EE70096174B /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +46,8 @@
 		1419AF2E14AB363900CBD64B /* FileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
 		1419AF2F14AB363900CBD64B /* FileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
 		1419AF3114AB39A400CBD64B /* iCloudFileSharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iCloudFileSharing.entitlements; sourceTree = "<group>"; };
-		14FEB79614AC024C0096174B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		14FEB79714AC024C0096174B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		14FEB7AB14AC1EE70096174B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		14FEB7AC14AC1EE70096174B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 				1419AF0C14AAFEAD00CBD64B /* AppDelegate.h */,
 				1419AF0D14AAFEAD00CBD64B /* AppDelegate.m */,
 				1419AF0F14AAFEAD00CBD64B /* MainStoryboard.storyboard */,
-				14FEB79514AC024C0096174B /* Resources */,
+				14FEB7AA14AC1EE70096174B /* Resources */,
 				1419AF0414AAFEAD00CBD64B /* Supporting Files */,
 				1419AF2E14AB363900CBD64B /* FileCell.h */,
 				1419AF2F14AB363900CBD64B /* FileCell.m */,
@@ -125,11 +125,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		14FEB79514AC024C0096174B /* Resources */ = {
+		14FEB7AA14AC1EE70096174B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				14FEB79614AC024C0096174B /* Default.png */,
-				14FEB79714AC024C0096174B /* Default@2x.png */,
+				14FEB7AB14AC1EE70096174B /* Default.png */,
+				14FEB7AC14AC1EE70096174B /* Default@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -186,8 +186,8 @@
 			files = (
 				1419AF0814AAFEAD00CBD64B /* InfoPlist.strings in Resources */,
 				1419AF1114AAFEAD00CBD64B /* MainStoryboard.storyboard in Resources */,
-				14FEB79814AC024C0096174B /* Default.png in Resources */,
-				14FEB79914AC024C0096174B /* Default@2x.png in Resources */,
+				14FEB7AD14AC1EE70096174B /* Default.png in Resources */,
+				14FEB7AE14AC1EE70096174B /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
