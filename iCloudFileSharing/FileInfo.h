@@ -14,5 +14,6 @@
 @property (readonly, nonatomic) NSString *title;
 @property (strong, nonatomic) NSURL *fileURL;
 @property (strong, nonatomic) NSURL *ubiquitousURL;
+@property (strong, nonatomic) NSMetadataItem *metadataItem;
 
 @end
