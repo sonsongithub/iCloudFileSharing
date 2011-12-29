@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1419AEFE14AAFEAD00CBD64B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1419AEFD14AAFEAD00CBD64B /* UIKit.framework */; };
+		1419AF0014AAFEAD00CBD64B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1419AEFF14AAFEAD00CBD64B /* Foundation.framework */; };
+		1419AF0214AAFEAD00CBD64B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1419AF0114AAFEAD00CBD64B /* CoreGraphics.framework */; };
+		1419AF0814AAFEAD00CBD64B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1419AF0614AAFEAD00CBD64B /* InfoPlist.strings */; };
+		1419AF0A14AAFEAD00CBD64B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF0914AAFEAD00CBD64B /* main.m */; };
+		1419AF0E14AAFEAD00CBD64B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF0D14AAFEAD00CBD64B /* AppDelegate.m */; };
+		1419AF1114AAFEAD00CBD64B /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1419AF0F14AAFEAD00CBD64B /* MainStoryboard.storyboard */; };
+		1419AF1C14AAFEEA00CBD64B /* FileIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF1B14AAFEEA00CBD64B /* FileIndexViewController.m */; };
+		1419AF2314AB17D300CBD64B /* NewFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2214AB17D300CBD64B /* NewFileViewController.m */; };
+		1419AF2614AB183100CBD64B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2514AB183100CBD64B /* DetailViewController.m */; };
+		1419AF2D14AB355700CBD64B /* FileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2C14AB355700CBD64B /* FileInfo.m */; };
+		1419AF3014AB363900CBD64B /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2F14AB363900CBD64B /* FileCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1419AEF914AAFEAD00CBD64B /* iCloudFileSharing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iCloudFileSharing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1419AEFD14AAFEAD00CBD64B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1419AEFF14AAFEAD00CBD64B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1419AF0114AAFEAD00CBD64B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1419AF0514AAFEAD00CBD64B /* iCloudFileSharing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iCloudFileSharing-Info.plist"; sourceTree = "<group>"; };
+		1419AF0714AAFEAD00CBD64B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1419AF0914AAFEAD00CBD64B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1419AF0B14AAFEAD00CBD64B /* iCloudFileSharing-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iCloudFileSharing-Prefix.pch"; sourceTree = "<group>"; };
+		1419AF0C14AAFEAD00CBD64B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1419AF0D14AAFEAD00CBD64B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1419AF1014AAFEAD00CBD64B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		1419AF1A14AAFEEA00CBD64B /* FileIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileIndexViewController.h; sourceTree = "<group>"; };
+		1419AF1B14AAFEEA00CBD64B /* FileIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileIndexViewController.m; sourceTree = "<group>"; };
+		1419AF2114AB17D300CBD64B /* NewFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFileViewController.h; sourceTree = "<group>"; };
+		1419AF2214AB17D300CBD64B /* NewFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFileViewController.m; sourceTree = "<group>"; };
+		1419AF2414AB183100CBD64B /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		1419AF2514AB183100CBD64B /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		1419AF2B14AB355700CBD64B /* FileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileInfo.h; sourceTree = "<group>"; };
+		1419AF2C14AB355700CBD64B /* FileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileInfo.m; sourceTree = "<group>"; };
+		1419AF2E14AB363900CBD64B /* FileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
+		1419AF2F14AB363900CBD64B /* FileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
+		1419AF3114AB39A400CBD64B /* iCloudFileSharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iCloudFileSharing.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1419AEF614AAFEAD00CBD64B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1419AEFE14AAFEAD00CBD64B /* UIKit.framework in Frameworks */,
+				1419AF0014AAFEAD00CBD64B /* Foundation.framework in Frameworks */,
+				1419AF0214AAFEAD00CBD64B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1419AEEE14AAFEAC00CBD64B = {
+			isa = PBXGroup;
+			children = (
+				1419AF0314AAFEAD00CBD64B /* iCloudFileSharing */,
+				1419AEFC14AAFEAD00CBD64B /* Frameworks */,
+				1419AEFA14AAFEAD00CBD64B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1419AEFA14AAFEAD00CBD64B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1419AEF914AAFEAD00CBD64B /* iCloudFileSharing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1419AEFC14AAFEAD00CBD64B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1419AEFD14AAFEAD00CBD64B /* UIKit.framework */,
+				1419AEFF14AAFEAD00CBD64B /* Foundation.framework */,
+				1419AF0114AAFEAD00CBD64B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1419AF0314AAFEAD00CBD64B /* iCloudFileSharing */ = {
+			isa = PBXGroup;
+			children = (
+				1419AF3114AB39A400CBD64B /* iCloudFileSharing.entitlements */,
+				1419AF2B14AB355700CBD64B /* FileInfo.h */,
+				1419AF2C14AB355700CBD64B /* FileInfo.m */,
+				1419AF1A14AAFEEA00CBD64B /* FileIndexViewController.h */,
+				1419AF1B14AAFEEA00CBD64B /* FileIndexViewController.m */,
+				1419AF2114AB17D300CBD64B /* NewFileViewController.h */,
+				1419AF2214AB17D300CBD64B /* NewFileViewController.m */,
+				1419AF2414AB183100CBD64B /* DetailViewController.h */,
+				1419AF2514AB183100CBD64B /* DetailViewController.m */,
+				1419AF0C14AAFEAD00CBD64B /* AppDelegate.h */,
+				1419AF0D14AAFEAD00CBD64B /* AppDelegate.m */,
+				1419AF0F14AAFEAD00CBD64B /* MainStoryboard.storyboard */,
+				1419AF0414AAFEAD00CBD64B /* Supporting Files */,
+				1419AF2E14AB363900CBD64B /* FileCell.h */,
+				1419AF2F14AB363900CBD64B /* FileCell.m */,
+			);
+			path = iCloudFileSharing;
+			sourceTree = "<group>";
+		};
+		1419AF0414AAFEAD00CBD64B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1419AF0514AAFEAD00CBD64B /* iCloudFileSharing-Info.plist */,
+				1419AF0614AAFEAD00CBD64B /* InfoPlist.strings */,
+				1419AF0914AAFEAD00CBD64B /* main.m */,
+				1419AF0B14AAFEAD00CBD64B /* iCloudFileSharing-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1419AEF814AAFEAD00CBD64B /* iCloudFileSharing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1419AF1714AAFEAD00CBD64B /* Build configuration list for PBXNativeTarget "iCloudFileSharing" */;
+			buildPhases = (
+				1419AEF514AAFEAD00CBD64B /* Sources */,
+				1419AEF614AAFEAD00CBD64B /* Frameworks */,
+				1419AEF714AAFEAD00CBD64B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iCloudFileSharing;
+			productName = iCloudFileSharing;
+			productReference = 1419AEF914AAFEAD00CBD64B /* iCloudFileSharing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1419AEF014AAFEAC00CBD64B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 1419AEF314AAFEAC00CBD64B /* Build configuration list for PBXProject "iCloudFileSharing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1419AEEE14AAFEAC00CBD64B;
+			productRefGroup = 1419AEFA14AAFEAD00CBD64B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1419AEF814AAFEAD00CBD64B /* iCloudFileSharing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1419AEF714AAFEAD00CBD64B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1419AF0814AAFEAD00CBD64B /* InfoPlist.strings in Resources */,
+				1419AF1114AAFEAD00CBD64B /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1419AEF514AAFEAD00CBD64B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1419AF0A14AAFEAD00CBD64B /* main.m in Sources */,
+				1419AF0E14AAFEAD00CBD64B /* AppDelegate.m in Sources */,
+				1419AF1C14AAFEEA00CBD64B /* FileIndexViewController.m in Sources */,
+				1419AF2314AB17D300CBD64B /* NewFileViewController.m in Sources */,
+				1419AF2614AB183100CBD64B /* DetailViewController.m in Sources */,
+				1419AF2D14AB355700CBD64B /* FileInfo.m in Sources */,
+				1419AF3014AB363900CBD64B /* FileCell.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1419AF0614AAFEAD00CBD64B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1419AF0714AAFEAD00CBD64B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1419AF0F14AAFEAD00CBD64B /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1419AF1014AAFEAD00CBD64B /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1419AF1514AAFEAD00CBD64B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "8A1D2E62-AABB-40CA-BDF5-AD52590B9807";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1419AF1614AAFEAD00CBD64B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuichi Yoshida (AK9FYY958C)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "8A1D2E62-AABB-40CA-BDF5-AD52590B9807";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1419AF1814AAFEAD00CBD64B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iCloudFileSharing/iCloudFileSharing.entitlements;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iCloudFileSharing/iCloudFileSharing-Prefix.pch";
+				INFOPLIST_FILE = "iCloudFileSharing/iCloudFileSharing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1419AF1914AAFEAD00CBD64B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iCloudFileSharing/iCloudFileSharing.entitlements;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iCloudFileSharing/iCloudFileSharing-Prefix.pch";
+				INFOPLIST_FILE = "iCloudFileSharing/iCloudFileSharing-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1419AEF314AAFEAC00CBD64B /* Build configuration list for PBXProject "iCloudFileSharing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1419AF1514AAFEAD00CBD64B /* Debug */,
+				1419AF1614AAFEAD00CBD64B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1419AF1714AAFEAD00CBD64B /* Build configuration list for PBXNativeTarget "iCloudFileSharing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1419AF1814AAFEAD00CBD64B /* Debug */,
+				1419AF1914AAFEAD00CBD64B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1419AEF014AAFEAC00CBD64B /* Project object */;
+}

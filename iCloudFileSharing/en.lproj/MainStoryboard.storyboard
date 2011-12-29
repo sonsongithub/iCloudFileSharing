@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="Ksi-RG-QZW">
+    <dependencies>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="YQG-pB-6tz">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="THD-Ed-Om2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="Ksi-RG-QZW" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="kPa-Ps-Fo0">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="q9f-gg-GwN" kind="relationship" relationship="rootViewController" id="cNY-Hr-etG"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-143" y="53"/>
+        </scene>
+        <scene sceneID="0xl-PQ-94A">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JBT-uf-yF1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="q9f-gg-GwN" customClass="FileIndexViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NJa-bV-i3V">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FileCell" id="LtU-wY-K6j" customClass="FileCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="hxp-Gp-jhq" kind="push" identifier="DetailViewController" id="RAj-td-lEE"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="q9f-gg-GwN" id="sGc-I9-oyj"/>
+                            <outlet property="delegate" destination="q9f-gg-GwN" id="Nds-x7-dpx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="List" id="a5s-Pd-ZVz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="EhP-Fq-c8V">
+                            <connections>
+                                <segue destination="TbY-kT-ZUJ" kind="modal" id="Q7c-qJ-Xa9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="315" y="53"/>
+        </scene>
+        <scene sceneID="oje-gX-Dze">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QoT-mx-tQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController definesPresentationContext="YES" id="TbY-kT-ZUJ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="BWc-qr-TWI">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qFN-Xh-Wrb" kind="relationship" relationship="rootViewController" id="KIj-pE-S47"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="853" y="-637"/>
+        </scene>
+        <scene sceneID="arB-7O-5JU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QkC-CR-uRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="hxp-Gp-jhq" customClass="DetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HVl-lm-FCG">
+                        <rect key="frame" x="0.0" y="64" width="320" height="372"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="mfa-LW-JIF">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="DAt-NL-2BU"/>
+                        <barButtonItem title="Share via browser" id="AB3-ue-IYM">
+                            <connections>
+                                <action selector="share:" destination="hxp-Gp-jhq" id="Ohi-AR-IFV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="3V4-Mv-g35"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="NTB-MS-kw4">
+                        <barButtonItem key="rightBarButtonItem" title="Move" id="CUg-30-bzb">
+                            <connections>
+                                <action selector="move:" destination="hxp-Gp-jhq" id="Lko-FR-zwp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="textView" destination="mfa-LW-JIF" id="78Y-Yf-q24"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="853" y="53"/>
+        </scene>
+        <scene sceneID="LFy-tK-6AQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iHL-vG-95q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="qFN-Xh-Wrb" customClass="NewFileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s2O-Jh-yNi">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="test test test test test test test test test test test test test test test test test test test test" id="PfG-eS-bVe">
+                                <rect key="frame" x="0.0" y="44" width="320" height="372"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <view contentMode="scaleToFill" id="zN3-aa-xhX">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="I6I-Mh-GrK">
+                                        <rect key="frame" x="93" y="6" width="217" height="31"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="File name" lineBreakMode="tailTruncation" minimumFontSize="10" id="JrT-l3-Wua">
+                                        <rect key="frame" x="10" y="11" width="75" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New" id="dIf-yI-ckc">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="XQS-zx-TV2">
+                            <connections>
+                                <action selector="cancel:" destination="qFN-Xh-Wrb" id="61Q-YR-naO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="wwj-4W-4le">
+                            <connections>
+                                <action selector="save:" destination="qFN-Xh-Wrb" id="8uH-dv-cGS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fileNameField" destination="I6I-Mh-GrK" id="Bpv-32-ckn"/>
+                        <outlet property="textView" destination="PfG-eS-bVe" id="l8f-Hv-OEc"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1330" y="-637"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="DetailViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DetailViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="move:"/>
+                <relationship kind="action" name="remove:"/>
+                <relationship kind="action" name="share:"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+        <class className="FileCell" superclassName="UITableViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FileCell.h"/>
+        </class>
+        <class className="FileIndexViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FileIndexViewController.h"/>
+        </class>
+        <class className="NewFileViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NewFileViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="fileNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
