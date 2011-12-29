@@ -94,6 +94,7 @@
 - (void)queryDidUpdate:(NSNotification*)notification {
 	NSLog(@"queryDidUpdate:");
 	[self updateQuery];
+	[self.tableView reloadData];
 }
 
 - (void)queryDidFinishGatheringForDocument:(NSNotification *)notification {
@@ -231,9 +232,6 @@
     static NSString *CellIdentifier = @"FileCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
 	
 	FileInfo *info = nil;
 	
@@ -249,6 +247,34 @@
 		FileCell *fileCell = (FileCell*)cell;
 		fileCell.info = info;
 		cell.textLabel.text = fileCell.info.title;
+		
+		if (info.metadataItem) {
+			NSNumber *downloadedKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadedKey];
+			NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
+			
+			if ([downloadedKey boolValue]) {
+				NSLog(@"Already downloaded.");
+				fileCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+				fileCell.indicator.hidden = YES;
+				[fileCell.indicator stopAnimating];
+			}
+			else {
+				if ([downloadingKey boolValue]) {
+					fileCell.accessoryType = UITableViewCellAccessoryNone;
+					fileCell.indicator.hidden = NO;
+					[fileCell.indicator startAnimating];
+				}
+				else {
+					fileCell.accessoryType = UITableViewCellAccessoryNone;
+					fileCell.indicator.hidden = YES;
+					[fileCell.indicator startAnimating];
+				}
+			}
+		}
+		else {
+			fileCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			fileCell.indicator.hidden = YES;
+		}
 	}
     
     return cell;

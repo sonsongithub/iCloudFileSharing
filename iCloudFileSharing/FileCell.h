@@ -13,5 +13,6 @@
 @interface FileCell : UITableViewCell
 
 @property (strong, nonatomic) FileInfo *info;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end

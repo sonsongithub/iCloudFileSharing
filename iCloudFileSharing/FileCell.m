@@ -13,9 +13,11 @@
 @implementation FileCell
 
 @synthesize info = _info;
+@synthesize indicator = _indicator;
 
 - (void)dealloc {
     self.info = nil;
+	self.indicator = nil;
     [super dealloc];
 }
 

@@ -97,6 +97,8 @@
 				1419AF3114AB39A400CBD64B /* iCloudFileSharing.entitlements */,
 				1419AF2B14AB355700CBD64B /* FileInfo.h */,
 				1419AF2C14AB355700CBD64B /* FileInfo.m */,
+				1419AF2E14AB363900CBD64B /* FileCell.h */,
+				1419AF2F14AB363900CBD64B /* FileCell.m */,
 				1419AF1A14AAFEEA00CBD64B /* FileIndexViewController.h */,
 				1419AF1B14AAFEEA00CBD64B /* FileIndexViewController.m */,
 				1419AF2114AB17D300CBD64B /* NewFileViewController.h */,
@@ -108,8 +110,6 @@
 				1419AF0F14AAFEAD00CBD64B /* MainStoryboard.storyboard */,
 				14FEB7AA14AC1EE70096174B /* Resources */,
 				1419AF0414AAFEAD00CBD64B /* Supporting Files */,
-				1419AF2E14AB363900CBD64B /* FileCell.h */,
-				1419AF2F14AB363900CBD64B /* FileCell.m */,
 			);
 			path = iCloudFileSharing;
 			sourceTree = "<group>";
