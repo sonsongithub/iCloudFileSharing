@@ -63,9 +63,6 @@
 	[alertView autorelease];
 }
 
-- (IBAction)remove:(id)sender {	
-}
-
 - (void)dealloc {
 	self.info = nil;
     self.textView = nil;
@@ -91,23 +88,17 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
-*/
 
 - (void)viewDidDisappear:(BOOL)animated {
 	[super viewDidDisappear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	[[NSFileManager defaultManager] setDelegate:nil];	
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -122,8 +113,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+	
 	self.title = self.info.title;
 	if (self.info.path) {
+		self.navigationItem.rightBarButtonItem.enabled = YES;
 		self.textView.text = [NSString stringWithContentsOfFile:self.info.path encoding:NSUTF8StringEncoding error:nil];
 	}
 	if (self.info.ubiquitousURL) {

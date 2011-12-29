@@ -14,7 +14,6 @@
 
 - (IBAction)move:(id)sender;
 - (IBAction)share:(id)sender;
-- (IBAction)remove:(id)sender;
 
 @property (strong, nonatomic) FileInfo *info;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
