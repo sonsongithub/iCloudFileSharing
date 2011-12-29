@@ -53,9 +53,7 @@
 
 #pragma mark - View lifecycle
 
-- (void)queryDidFinishGatheringForDocument:(NSNotification *)notification {
-	NSLog(@"queryDidFinishGatheringForDocument:");
-	[self.query stopQuery];
+- (void)updateQuery {
 	
 	[self.ubicuitousFiles removeAllObjects];
 	for (int i = 0; i < self.query.resultCount; i++) {
@@ -65,8 +63,45 @@
 		
 		FileInfo *info = [[[FileInfo alloc] init] autorelease];
 		info.ubiquitousURL = url;
+		info.metadataItem = item;
 		[self.ubicuitousFiles addObject:info];
+		
+		
+		NSNumber *downloadedKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadedKey];
+		NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
+		
+		if ([downloadedKey boolValue]) {
+			NSLog(@"Already downloaded.");
+		}
+		else {
+			if ([downloadingKey boolValue]) {
+				NSLog(@"Still downloading.");
+			}
+			else {
+				NSLog(@"Not yet.");
+				NSError *error = nil;
+				[[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:info.ubiquitousURL error:&error];
+				if (error)
+					NSLog(@"Can't start downloading - %@", [error localizedDescription]);
+				else {
+					NSLog(@"Start downloading");
+				}
+			}
+		}
 	}
+}
+
+- (void)queryDidUpdate:(NSNotification*)notification {
+	NSLog(@"queryDidUpdate:");
+	[self updateQuery];
+}
+
+- (void)queryDidFinishGatheringForDocument:(NSNotification *)notification {
+	NSLog(@"queryDidFinishGatheringForDocument:");
+	[self.query stopQuery];
+	[self.query disableUpdates];
+	[self updateQuery];
+	[self.query enableUpdates];
 	[self.tableView reloadData];
 }
 
@@ -83,6 +118,10 @@
 		NSPredicate *pred = [NSPredicate predicateWithFormat: @"%K like '*'", NSMetadataItemFSNameKey];
 		[self.query setPredicate:pred];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(queryDidFinishGatheringForDocument:) name:NSMetadataQueryDidFinishGatheringNotification object:self.query];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(queryDidUpdate:)
+													 name:NSMetadataQueryDidUpdateNotification
+												   object:self.query];
 		[self.query startQuery];
 	}
 }
