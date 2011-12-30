@@ -1,5 +1,6 @@
 iCloud File Sharing
 =======
+![](http://sonson.jp/wp/wp-content/uploads/2011/12/iCloudFileSharing.png)
 
 Introduction and information
 =======
