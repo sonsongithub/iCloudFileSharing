@@ -181,13 +181,13 @@
 			URL = info.ubiquitousURL;
 		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-			NSFileCoordinator* fileCoordinator = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
+			NSFileCoordinator* fileCoordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
 			[fileCoordinator coordinateWritingItemAtURL:URL
 												options:NSFileCoordinatorWritingForDeleting
 												  error:nil
 											  byAccessor:^(NSURL* writingURL) {
 												  NSError *error = nil;
-												  NSFileManager* fileManager = [[NSFileManager alloc] init];
+												  NSFileManager* fileManager = [[[NSFileManager alloc] init] autorelease];
 												  [fileManager removeItemAtURL:writingURL error:&error];
 												  if (error)
 													  NSLog(@"%@", [error localizedDescription]);
