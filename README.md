@@ -4,8 +4,11 @@ iCloud File Sharing
 
 Introduction and information
 =======
-To be written.
-
+This is sample code for file sharing via iCloud. It enables users to create a text file and move it to iCloud storage, and then delete files from local and iCloud storage.
+In addition, such as files on iCloud are shared via http protocol.
+You have to overwrite iCloudSharing.entitlements and application identifier(like com.sonson.iCloudSharing)
+ and code signing settings.
+ 
 License
 =======
 [BSD License][].
