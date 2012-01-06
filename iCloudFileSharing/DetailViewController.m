@@ -49,30 +49,15 @@
 	[coordinator coordinateWritingItemAtURL:self.info.ubiquitousURL options:NSFileCoordinatorWritingForReplacing
 									  error:&error
 								 byAccessor:^(NSURL *writingURL) {
-									 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:writingURL];
-									 for (NSFileVersion *version in unresolvedVersions) {
-										 NSString *string = [NSString stringWithContentsOfURL:[version URL] encoding:NSUTF8StringEncoding error:nil];
-										 version.resolved = YES;
-										 NSLog(@"%@", version);
-										 NSLog(@"%@", string);
-									 }
 									 NSError *error = nil;
-									 [NSFileVersion removeOtherVersionsOfItemAtURL:writingURL error:&error];
-									 if (error) {
-										 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
-									 }
-									 else {
-										 NSLog(@"Removing other versions OK = %@", writingURL); 
-									 }
-									 
 									 NSData *data = [self.textView.text dataUsingEncoding:NSUTF8StringEncoding];
 									 [data writeToURL:writingURL options:0 error:&error];
-									 if (error) {
+									 
+									 if (error)
 										 NSLog(@"Writing Error = %@", [error localizedDescription]);
-									 }
-									 else {
+									 else
 										 NSLog(@"Writing OK = %@", writingURL); 
-									 }
+									 
 									 [self.navigationController popViewControllerAnimated:YES];
 	}];
 }
