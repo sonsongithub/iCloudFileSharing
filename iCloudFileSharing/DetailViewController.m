@@ -36,6 +36,55 @@
 
 @synthesize textView = _textView;
 @synthesize info = _info;
+@synthesize moveButton = _moveButton;
+
+- (void)saveFileOnLocalStorage {
+	NSData *data = [self.textView.text dataUsingEncoding:NSUTF8StringEncoding];
+	[data writeToFile:self.info.path atomically:YES];
+}
+
+- (void)saveFileOnICloud {
+	NSError *error = nil;
+	NSFileCoordinator *coordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
+	[coordinator coordinateWritingItemAtURL:self.info.ubiquitousURL options:NSFileCoordinatorWritingForReplacing
+									  error:&error
+								 byAccessor:^(NSURL *writingURL) {
+									 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:writingURL];
+									 for (NSFileVersion *version in unresolvedVersions) {
+										 NSString *string = [NSString stringWithContentsOfURL:[version URL] encoding:NSUTF8StringEncoding error:nil];
+										 version.resolved = YES;
+										 NSLog(@"%@", version);
+										 NSLog(@"%@", string);
+									 }
+									 NSError *error = nil;
+									 [NSFileVersion removeOtherVersionsOfItemAtURL:writingURL error:&error];
+									 if (error) {
+										 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
+									 }
+									 else {
+										 NSLog(@"Removing other versions OK = %@", writingURL); 
+									 }
+									 
+									 NSData *data = [self.textView.text dataUsingEncoding:NSUTF8StringEncoding];
+									 [data writeToURL:writingURL options:0 error:&error];
+									 if (error) {
+										 NSLog(@"Writing Error = %@", [error localizedDescription]);
+									 }
+									 else {
+										 NSLog(@"Writing OK = %@", writingURL); 
+									 }
+									 [self.navigationController popViewControllerAnimated:YES];
+	}];
+}
+
+- (IBAction)save:(id)sender {
+	BOOL isICloud =(self.info.path == nil);
+	
+	if (isICloud)
+		[self saveFileOnICloud];
+	else
+		[self saveFileOnLocalStorage];
+}
 
 - (IBAction)move:(id)sender {
 	NSLog(@"move");
@@ -88,6 +137,7 @@
 - (void)dealloc {
 	self.info = nil;
     self.textView = nil;
+	self.moveButton = nil;
     [super dealloc];
 }
 
@@ -126,10 +176,10 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	if (self.info.path) {
+		self.moveButton.title = NSLocalizedString(@"Move to iCloud", nil);
 	}
 	if (self.info.ubiquitousURL) {
-		self.navigationItem.rightBarButtonItem.enabled = NO;
-		[self.navigationController setToolbarHidden:NO animated:YES];
+		self.moveButton.title = NSLocalizedString(@"Move to local", nil);
 	}
 }
 
@@ -138,12 +188,39 @@
 	
 	self.title = self.info.title;
 	if (self.info.path) {
-		self.navigationItem.rightBarButtonItem.enabled = YES;
 		self.textView.text = [NSString stringWithContentsOfFile:self.info.path encoding:NSUTF8StringEncoding error:nil];
 	}
 	if (self.info.ubiquitousURL) {
-		self.navigationItem.rightBarButtonItem.enabled = NO;
-		self.textView.text = [NSString stringWithContentsOfURL:self.info.ubiquitousURL encoding:NSUTF8StringEncoding error:nil];
+		NSError *error = nil;
+		NSFileCoordinator *coordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
+		
+		[coordinator coordinateReadingItemAtURL:self.info.ubiquitousURL 
+										options:NSFileCoordinatorReadingWithoutChanges
+										  error:&error
+									 byAccessor:^(NSURL *readingURL) {
+										 NSMutableString *string = [NSMutableString string];
+										 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:readingURL];
+										 for (NSFileVersion *version in unresolvedVersions) {
+											 NSError *error = nil;
+											 version.resolved = YES;
+											 NSLog(@"%@", version);
+											 NSString *otherVersionString = [NSString stringWithContentsOfURL:[version URL] 
+																									 encoding:NSUTF8StringEncoding 
+																										error:&error];
+											 NSLog(@"%@", otherVersionString);
+											 [string appendString:otherVersionString];
+										 }
+										 NSError *error = nil;
+										 [NSFileVersion removeOtherVersionsOfItemAtURL:readingURL error:&error];
+										 if (error) {
+											 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
+										 }
+										 else {
+											 NSLog(@"Removing other versions OK = %@", readingURL); 
+										 }
+										 [string appendString:[NSString stringWithContentsOfURL:self.info.ubiquitousURL encoding:NSUTF8StringEncoding error:nil]];
+										 self.textView.text = string;
+									 }];
 	}
 }
 

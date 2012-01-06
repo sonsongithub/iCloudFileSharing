@@ -35,9 +35,11 @@
 @interface DetailViewController : UIViewController
 
 - (IBAction)move:(id)sender;
+- (IBAction)save:(id)sender;
 - (IBAction)share:(id)sender;
 
 @property (strong, nonatomic) FileInfo *info;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *moveButton;
 
 @end
