@@ -104,7 +104,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="3V4-Mv-g35"/>
-                        <barButtonItem title="Move" id="E6u-hj-ARX">
+                        <barButtonItem title="Move to iCloud" id="E6u-hj-ARX">
                             <connections>
                                 <action selector="move:" destination="hxp-Gp-jhq" id="aO7-Mv-WNP"/>
                             </connections>
@@ -164,7 +164,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New" id="dIf-yI-ckc">
+                    <navigationItem key="navigationItem" title="New local file" id="dIf-yI-ckc">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="XQS-zx-TV2">
                             <connections>
                                 <action selector="cancel:" destination="qFN-Xh-Wrb" id="61Q-YR-naO"/>

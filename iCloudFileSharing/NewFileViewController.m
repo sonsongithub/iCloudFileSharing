@@ -35,6 +35,35 @@
 @synthesize fileNameField = _fileNameField;
 @synthesize textView = _textView;
 
+- (void)updateTextViewRectWithKeyboardRect:(CGRect)keyboardRectInWindow {
+	CGRect textview_frame = self.textView.frame;
+	
+	CGPoint keyboardLeftTop = [self.view convertPoint:keyboardRectInWindow.origin fromView:[[UIApplication sharedApplication] keyWindow]];
+	
+	float newTextViewHeight = keyboardLeftTop.y - textview_frame.origin.y;
+	
+	textview_frame.size.height = newTextViewHeight;
+	
+	self.textView.frame = textview_frame;
+}
+
+#pragma mark - Notifications
+
+- (void)keyboardDidShow:(NSNotification*)notification {
+	CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	[self updateTextViewRectWithKeyboardRect:keyboardRect];
+}
+
+- (void)keyboardWillHide:(NSNotification*)notification {
+	CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	[self updateTextViewRectWithKeyboardRect:keyboardRect];
+}
+
+- (void)keyboardWillChange:(NSNotification*)notification {
+	CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+	[self updateTextViewRectWithKeyboardRect:keyboardRect];
+}
+
 - (IBAction)save:(id)sender {
 	NSString *fileName = self.fileNameField.text;
 	
@@ -62,49 +91,15 @@
     [super dealloc];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-}
-*/
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
