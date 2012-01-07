@@ -43,6 +43,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+	
+#ifdef _DEST_CONTAINER_IDENTIFIER
+	NSURL *iCloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:@"JP866VWWSD.com.sonson.iCloudFileSharing"];
+	NSURL *iCloudURL2 = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+	
+	NSLog(@"%@", iCloudURL);
+	NSLog(@"%@", iCloudURL2);
+#endif	
     return YES;
 }
 							
