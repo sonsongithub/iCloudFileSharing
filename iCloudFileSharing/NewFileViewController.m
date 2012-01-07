@@ -35,6 +35,8 @@
 @synthesize fileNameField = _fileNameField;
 @synthesize textView = _textView;
 
+#pragma mark - Instance method
+
 - (void)updateTextViewRectWithKeyboardRect:(CGRect)keyboardRectInWindow {
 	CGRect textview_frame = self.textView.frame;
 	
@@ -64,6 +66,8 @@
 	[self updateTextViewRectWithKeyboardRect:keyboardRect];
 }
 
+#pragma mark - IBAction
+
 - (IBAction)save:(id)sender {
 	NSString *fileName = self.fileNameField.text;
 	
@@ -85,11 +89,15 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - dealloc
+
 - (void)dealloc {
     self.fileNameField = nil;
 	self.textView = nil;
     [super dealloc];
 }
+
+#pragma mark - Override
 
 - (void)viewDidLoad {
     [super viewDidLoad];

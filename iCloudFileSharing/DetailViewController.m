@@ -38,6 +38,8 @@
 @synthesize info = _info;
 @synthesize moveButton = _moveButton;
 
+#pragma mark - Instance method
+
 - (void)updateTextViewRectWithKeyboardRect:(CGRect)keyboardRectInWindow {
 	CGRect textview_frame = self.textView.frame;
 	
@@ -66,6 +68,8 @@
 	CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	[self updateTextViewRectWithKeyboardRect:keyboardRect];
 }
+
+#pragma mark - IBAction
 
 - (IBAction)save:(id)sender {
 	NSError *error = nil;
@@ -108,16 +112,6 @@
 */
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (buttonIndex == 0) {
-	}
-	if (buttonIndex == 1) {
-		NSString *title = alertView.message;
-		NSURL *URL = [NSURL URLWithString:title];
-		[[UIApplication sharedApplication] openURL:URL];
-	}
-}
-
 - (IBAction)share:(id)sender {
 	if ([self.info isUbiquitous]) {
 		NSDate *expirationDate = nil;
@@ -134,6 +128,18 @@
 												  otherButtonTitles:@"Open Safari", nil];
 		[alertView show];
 		[alertView autorelease];
+	}
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 0) {
+	}
+	if (buttonIndex == 1) {
+		NSString *title = alertView.message;
+		NSURL *URL = [NSURL URLWithString:title];
+		[[UIApplication sharedApplication] openURL:URL];
 	}
 }
 
@@ -154,10 +160,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-	[super viewDidDisappear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -205,10 +207,6 @@
 									 [string appendString:[NSString stringWithContentsOfURL:[[NSFileVersion currentVersionOfItemAtURL:readingURL] URL] encoding:NSUTF8StringEncoding error:nil]];
 									 self.textView.text = string;
 								 }];
-}
-
-- (void)viewDidUnload {
-    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
