@@ -65,8 +65,7 @@
 		NSString *fullpath = [documentsDirectory stringByAppendingPathComponent:subpath];
 		
 		FileInfo *info = [[[FileInfo alloc] init] autorelease];
-		info.path = fullpath;
-		info.fileURL = [NSURL fileURLWithPath:fullpath];
+		info.URL = [NSURL fileURLWithPath:fullpath];
 		
 		[self.localFiles addObject:info];
 	}
@@ -84,7 +83,7 @@
 		NSLog(@"%@", url);
 		
 		FileInfo *info = [[[FileInfo alloc] init] autorelease];
-		info.ubiquitousURL = url;
+		info.URL = url;
 		info.metadataItem = item;
 		[self.ubicuitousFiles addObject:info];
 		
@@ -102,7 +101,7 @@
 			else {
 				NSLog(@"Not yet.");
 				NSError *error = nil;
-				[[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:info.ubiquitousURL error:&error];
+				[[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:info.URL error:&error];
 				if (error)
 					NSLog(@"Can't start downloading - %@", [error localizedDescription]);
 				else {
@@ -195,16 +194,9 @@
 		
 		FileInfo* info = [fileList objectAtIndex:indexPath.row];
 		
-		NSURL *URL = nil;
-		
-		if (info.fileURL)
-			URL = info.fileURL;
-		else
-			URL = info.ubiquitousURL;
-		
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
 			NSFileCoordinator* fileCoordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
-			[fileCoordinator coordinateWritingItemAtURL:URL
+			[fileCoordinator coordinateWritingItemAtURL:info.URL
 												options:NSFileCoordinatorWritingForDeleting
 												  error:nil
 											  byAccessor:^(NSURL* writingURL) {
@@ -268,7 +260,8 @@
 	if ([cell isKindOfClass:[FileCell class]]) {
 		FileCell *fileCell = (FileCell*)cell;
 		fileCell.info = info;
-		cell.textLabel.text = fileCell.info.title;
+		
+		cell.textLabel.text = info.title;
 		
 		if (info.metadataItem) {
 			NSNumber *downloadedKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadedKey];

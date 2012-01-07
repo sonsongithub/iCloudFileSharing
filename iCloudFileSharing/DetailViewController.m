@@ -38,15 +38,13 @@
 @synthesize info = _info;
 @synthesize moveButton = _moveButton;
 
-- (void)saveFileOnLocalStorage {
-	NSData *data = [self.textView.text dataUsingEncoding:NSUTF8StringEncoding];
-	[data writeToFile:self.info.path atomically:YES];
+- (void)saveFileOnICloud {
 }
 
-- (void)saveFileOnICloud {
+- (IBAction)save:(id)sender {
 	NSError *error = nil;
 	NSFileCoordinator *coordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
-	[coordinator coordinateWritingItemAtURL:self.info.ubiquitousURL options:NSFileCoordinatorWritingForReplacing
+	[coordinator coordinateWritingItemAtURL:self.info.URL options:NSFileCoordinatorWritingForReplacing
 									  error:&error
 								 byAccessor:^(NSURL *writingURL) {
 									 NSError *error = nil;
@@ -59,21 +57,12 @@
 										 NSLog(@"Writing OK = %@", writingURL); 
 									 
 									 [self.navigationController popViewControllerAnimated:YES];
-	}];
-}
-
-- (IBAction)save:(id)sender {
-	BOOL isICloud =(self.info.path == nil);
-	
-	if (isICloud)
-		[self saveFileOnICloud];
-	else
-		[self saveFileOnLocalStorage];
+								 }];
 }
 
 - (IBAction)move:(id)sender {
 	NSLog(@"move");
-	
+/*	
 	NSURL *localURL = self.info.fileURL;
 	
 	NSURL *containerUbiquitousURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
@@ -90,6 +79,7 @@
 		NSLog(@"%@", [error localizedDescription]);
 	}
 	[self.navigationController popViewControllerAnimated:YES];
+*/
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -103,20 +93,22 @@
 }
 
 - (IBAction)share:(id)sender {
-	NSDate *expirationDate = nil;
-	NSError *error = nil;
-	NSURL *sharedURL = [[NSFileManager defaultManager] URLForPublishingUbiquitousItemAtURL:self.info.ubiquitousURL
-																			expirationDate:&expirationDate
-																					 error:&error];
-	NSLog(@"%@", sharedURL);
-	
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Share", nil)
-														message:[sharedURL absoluteString]
-													   delegate:self
-											  cancelButtonTitle:@"Cancel"
-											  otherButtonTitles:@"Open Safari", nil];
-	[alertView show];
-	[alertView autorelease];
+	if ([self.info isUbiquitous]) {
+		NSDate *expirationDate = nil;
+		NSError *error = nil;	
+		NSURL *sharedURL = [[NSFileManager defaultManager] URLForPublishingUbiquitousItemAtURL:self.info.URL
+																				expirationDate:&expirationDate
+																						 error:&error];
+		NSLog(@"%@", sharedURL);
+		
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Share", nil)
+															message:[sharedURL absoluteString]
+														   delegate:self
+												  cancelButtonTitle:@"Cancel"
+												  otherButtonTitles:@"Open Safari", nil];
+		[alertView show];
+		[alertView autorelease];
+	}
 }
 
 - (void)dealloc {
@@ -124,23 +116,6 @@
     self.textView = nil;
 	self.moveButton = nil;
     [super dealloc];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -160,53 +135,48 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	if (self.info.path) {
-		self.moveButton.title = NSLocalizedString(@"Move to iCloud", nil);
-	}
-	if (self.info.ubiquitousURL) {
+	
+	if ([self.info isUbiquitous])
 		self.moveButton.title = NSLocalizedString(@"Move to local", nil);
-	}
+	else
+		self.moveButton.title = NSLocalizedString(@"Move to iCloud", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	
 	self.title = self.info.title;
-	if (self.info.path) {
-		self.textView.text = [NSString stringWithContentsOfFile:self.info.path encoding:NSUTF8StringEncoding error:nil];
-	}
-	if (self.info.ubiquitousURL) {
-		NSError *error = nil;
-		NSFileCoordinator *coordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
-		
-		[coordinator coordinateReadingItemAtURL:self.info.ubiquitousURL 
-										options:NSFileCoordinatorReadingWithoutChanges
-										  error:&error
-									 byAccessor:^(NSURL *readingURL) {
-										 NSMutableString *string = [NSMutableString string];
-										 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:readingURL];
-										 for (NSFileVersion *version in unresolvedVersions) {
-											 NSError *error = nil;
-											 version.resolved = YES;
-											 NSLog(@"%@", version);
-											 NSString *otherVersionString = [NSString stringWithContentsOfURL:[version URL] 
-																									 encoding:NSUTF8StringEncoding 
-																										error:&error];
-											 NSLog(@"%@", otherVersionString);
-											 [string appendString:otherVersionString];
-										 }
+	
+	NSError *error = nil;
+	NSFileCoordinator *coordinator = [[[NSFileCoordinator alloc] initWithFilePresenter:nil] autorelease];
+	
+	[coordinator coordinateReadingItemAtURL:self.info.URL 
+									options:NSFileCoordinatorReadingWithoutChanges
+									  error:&error
+								 byAccessor:^(NSURL *readingURL) {
+									 NSMutableString *string = [NSMutableString string];
+									 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:readingURL];
+									 for (NSFileVersion *version in unresolvedVersions) {
 										 NSError *error = nil;
-										 [NSFileVersion removeOtherVersionsOfItemAtURL:readingURL error:&error];
-										 if (error) {
-											 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
-										 }
-										 else {
-											 NSLog(@"Removing other versions OK = %@", readingURL); 
-										 }
-										 [string appendString:[NSString stringWithContentsOfURL:self.info.ubiquitousURL encoding:NSUTF8StringEncoding error:nil]];
-										 self.textView.text = string;
-									 }];
-	}
+										 version.resolved = YES;
+										 NSLog(@"%@", version);
+										 NSString *otherVersionString = [NSString stringWithContentsOfURL:[version URL] 
+																								 encoding:NSUTF8StringEncoding 
+																									error:&error];
+										 NSLog(@"%@", otherVersionString);
+										 [string appendString:otherVersionString];
+									 }
+									 NSError *error = nil;
+									 [NSFileVersion removeOtherVersionsOfItemAtURL:readingURL error:&error];
+									 if (error) {
+										 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
+									 }
+									 else {
+										 NSLog(@"Removing other versions OK = %@", readingURL); 
+									 }
+									 [string appendString:[NSString stringWithContentsOfURL:[[NSFileVersion currentVersionOfItemAtURL:readingURL] URL] encoding:NSUTF8StringEncoding error:nil]];
+									 self.textView.text = string;
+								 }];
 }
 
 - (void)viewDidUnload

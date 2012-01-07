@@ -32,10 +32,10 @@
 
 @interface FileInfo : NSObject
 
-@property (strong, nonatomic) NSString *path;
 @property (readonly, nonatomic) NSString *title;
-@property (strong, nonatomic) NSURL *fileURL;
-@property (strong, nonatomic) NSURL *ubiquitousURL;
+@property (strong, nonatomic) NSURL *URL;
 @property (strong, nonatomic) NSMetadataItem *metadataItem;
+
+- (BOOL)isUbiquitous;
 
 @end

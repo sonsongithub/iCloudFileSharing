@@ -32,26 +32,22 @@
 
 @implementation FileInfo
 
-@synthesize fileURL = _fileURL;
-@synthesize path = _path;
-@synthesize ubiquitousURL = _ubiquitousURL;
+@synthesize URL = _URL;
 @synthesize metadataItem = _metadataItem;
 
 - (NSString*)title {
-	if (self.ubiquitousURL)
-		return [self.ubiquitousURL lastPathComponent];
-	if (self.path)
-		return [self.path lastPathComponent];
-	if (self.fileURL)
-		return [self.fileURL lastPathComponent];
+	if (self.URL)
+		return [self.URL lastPathComponent];
 	return nil;
+}
+
+- (BOOL)isUbiquitous {
+	return [[NSFileManager defaultManager] isUbiquitousItemAtURL:self.URL];
 }
 
 - (void)dealloc {
 	self.metadataItem = nil;
-	self.ubiquitousURL = nil;
-    self.fileURL = nil;
-	self.path = nil;
+	self.URL = nil;
     [super dealloc];
 }
 
