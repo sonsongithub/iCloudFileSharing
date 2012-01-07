@@ -40,6 +40,7 @@
 
 @property (strong, nonatomic) FileInfo *info;
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *moveButton;
 
 @end

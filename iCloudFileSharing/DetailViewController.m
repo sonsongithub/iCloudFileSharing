@@ -37,6 +37,7 @@
 @synthesize textView = _textView;
 @synthesize info = _info;
 @synthesize moveButton = _moveButton;
+@synthesize shareButton = _shareButton;
 
 #pragma mark - Instance method
 
@@ -92,24 +93,25 @@
 
 - (IBAction)move:(id)sender {
 	NSLog(@"move");
-/*
-	NSURL *localURL = self.info.fileURL;
 	
-	NSURL *containerUbiquitousURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
-	NSURL *destinationUbiquitousURL = [[containerUbiquitousURL URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:[self.info.path lastPathComponent]];
-	
-	NSError *error = nil;
-	if ([[NSFileManager defaultManager] setUbiquitous:YES 
-											itemAtURL:localURL
-									   destinationURL:destinationUbiquitousURL
-												error:&error]) {
-		NSLog(@"Copy to iCloud storage");
+	if (![self.info isUbiquitous]) {
+		NSURL *containerUbiquitousURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
+		NSURL *destinationUbiquitousURL = [[containerUbiquitousURL URLByAppendingPathComponent:@"Documents"] URLByAppendingPathComponent:[self.info.URL lastPathComponent]];
+
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
+			NSError *error = nil;
+			if ([[NSFileManager defaultManager] setUbiquitous:YES 
+													itemAtURL:self.info.URL
+											   destinationURL:destinationUbiquitousURL
+														error:&error]) {
+				NSLog(@"Copy to iCloud storage");
+			}
+			else {
+				NSLog(@"%@", [error localizedDescription]);
+			}
+		});
+		[self.navigationController popViewControllerAnimated:YES];
 	}
-	else {
-		NSLog(@"%@", [error localizedDescription]);
-	}
-	[self.navigationController popViewControllerAnimated:YES];
-*/
 }
 
 - (IBAction)share:(id)sender {
@@ -149,6 +151,7 @@
 	self.info = nil;
     self.textView = nil;
 	self.moveButton = nil;
+	self.shareButton = nil;
     [super dealloc];
 }
 
@@ -169,7 +172,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
+	
+	self.shareButton.enabled = [self.info isUbiquitous];
 	self.moveButton.enabled = ![self.info isUbiquitous];
+	[self.navigationController setToolbarHidden:NO animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -110,6 +110,7 @@
 			}
 		}
 	}
+	[self reloadLocalFiles];
 }
 
 - (void)queryDidUpdate:(NSNotification*)notification {

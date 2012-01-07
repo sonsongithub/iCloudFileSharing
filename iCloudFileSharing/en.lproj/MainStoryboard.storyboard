@@ -120,6 +120,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="moveButton" destination="E6u-hj-ARX" id="Vd6-xN-ToO"/>
+                        <outlet property="shareButton" destination="AB3-ue-IYM" id="9Hd-rR-a53"/>
                         <outlet property="textView" destination="mfa-LW-JIF" id="78Y-Yf-q24"/>
                     </connections>
                 </viewController>
@@ -193,6 +194,7 @@
                 <relationship kind="action" name="save:"/>
                 <relationship kind="action" name="share:"/>
                 <relationship kind="outlet" name="moveButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="shareButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
             </relationships>
         </class>
