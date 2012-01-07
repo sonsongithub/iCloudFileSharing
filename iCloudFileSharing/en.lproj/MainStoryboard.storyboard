@@ -54,6 +54,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="List" id="a5s-Pd-ZVz">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="pSY-s9-cb4">
+                            <connections>
+                                <action selector="reload:" destination="q9f-gg-GwN" id="Zph-Wv-h4Q"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="EhP-Fq-c8V">
                             <connections>
                                 <segue destination="TbY-kT-ZUJ" kind="modal" id="Q7c-qJ-Xa9"/>
@@ -206,6 +211,9 @@
         </class>
         <class className="FileIndexViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/FileIndexViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="reload:"/>
+            </relationships>
         </class>
         <class className="NewFileViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NewFileViewController.h"/>

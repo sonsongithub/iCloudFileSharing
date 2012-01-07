@@ -36,4 +36,15 @@
 @property (strong, nonatomic) NSMutableArray *ubicuitousFiles;
 @property (strong, nonatomic) NSMetadataQuery *query;
 
+#pragma mark - IBAction
+- (IBAction)reload:(id)sender;
+
+#pragma mark - Instance method
+- (void)reloadLocalFiles;
+- (void)updateQuery;
+
+#pragma mark - NSNotification
+- (void)queryDidUpdate:(NSNotification*)notification;
+- (void)queryDidFinishGatheringForDocument:(NSNotification *)notification;
+
 @end

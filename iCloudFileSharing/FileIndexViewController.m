@@ -40,19 +40,14 @@
 @synthesize ubicuitousFiles = _ubicuitousFiles;
 @synthesize query = _query;
 
-- (void)dealloc {
-	self.query = nil;
-    self.localFiles = nil;
-	self.ubicuitousFiles = nil;
-    [super dealloc];
+#pragma mark - IBAction
+
+- (IBAction)reload:(id)sender {
+	[self reloadLocalFiles];
+	[self.query startQuery];
 }
 
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
+#pragma mark - Instance method
 
 - (void)reloadLocalFiles {
 	[self.localFiles removeAllObjects];
@@ -71,8 +66,6 @@
 	}
 	[self.tableView reloadData];
 }
-
-#pragma mark - View lifecycle
 
 - (void)updateQuery {
 	
@@ -113,6 +106,8 @@
 	[self reloadLocalFiles];
 }
 
+#pragma mark - NSNotification
+
 - (void)queryDidUpdate:(NSNotification*)notification {
 	NSLog(@"queryDidUpdate:");
 	[self updateQuery];
@@ -126,6 +121,17 @@
 	[self updateQuery];
 	[self.query enableUpdates];
 	[self.tableView reloadData];
+}
+
+#pragma mark - View lifecycle
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"DetailViewController"]) {
+		if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
+			DetailViewController *con = segue.destinationViewController;
+			con.info =((FileCell*)sender).info;
+		}
+	}
 }
 
 - (void)viewDidLoad {
@@ -149,12 +155,6 @@
 	}
 }
 
-- (void)viewDidUnload {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 	[self reloadLocalFiles];
@@ -169,10 +169,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 	[self.query stopQuery];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -224,15 +220,6 @@
 	if (section == 1)
 		return [self.ubicuitousFiles count];
 	return 0;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"DetailViewController"]) {
-		if ([segue.destinationViewController isKindOfClass:[DetailViewController class]]) {
-			DetailViewController *con = segue.destinationViewController;
-			con.info =((FileCell*)sender).info;
-		}
-	}
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -294,6 +281,15 @@
 	}
     
     return cell;
+}
+
+#pragma mark - dealloc
+
+- (void)dealloc {
+	self.query = nil;
+    self.localFiles = nil;
+	self.ubicuitousFiles = nil;
+    [super dealloc];
 }
 
 @end
