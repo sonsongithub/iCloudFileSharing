@@ -155,11 +155,16 @@
 	}
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIApplicationDidEnterBackgroundNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIApplicationWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)UIApplicationDidEnterBackgroundNotification:(NSNotification*)notification {
 	[self.query disableUpdates];
 	[self.query stopQuery];
+}
+
+- (void)UIApplicationWillEnterForegroundNotification:(NSNotification*)notification {
+	[self.query startQuery];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
