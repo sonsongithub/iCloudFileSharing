@@ -153,6 +153,13 @@
 												   object:self.query];
 		[self.query startQuery];
 	}
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIApplicationDidEnterBackgroundNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+}
+
+- (void)UIApplicationDidEnterBackgroundNotification:(NSNotification*)notification {
+	[self.query disableUpdates];
+	[self.query stopQuery];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
