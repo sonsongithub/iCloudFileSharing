@@ -33,6 +33,7 @@
 #import "FileInfo.h"
 #import "FileCell.h"
 #import "DetailViewController.h"
+#import "NSMetadataItem+sonson.h"
 
 @implementation FileIndexViewController
 
@@ -72,8 +73,10 @@
 	[self.ubicuitousFiles removeAllObjects];
 	for (int i = 0; i < self.query.resultCount; i++) {
 		NSMetadataItem *item = [self.query resultAtIndex:i];
+		
+		[item dump];
+		
 		NSURL *url = [item valueForAttribute:NSMetadataItemURLKey];
-		NSLog(@"%@", url);
 		
 		FileInfo *info = [[[FileInfo alloc] init] autorelease];
 		info.URL = url;
@@ -85,14 +88,11 @@
 		NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
 		
 		if ([downloadedKey boolValue]) {
-			NSLog(@"Already downloaded.");
 		}
 		else {
 			if ([downloadingKey boolValue]) {
-				NSLog(@"Still downloading.");
 			}
 			else {
-				NSLog(@"Not yet.");
 				NSError *error = nil;
 				[[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:info.URL error:&error];
 				if (error)
@@ -268,7 +268,6 @@
 			NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
 			
 			if ([downloadedKey boolValue]) {
-				NSLog(@"Already downloaded.");
 				fileCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 				fileCell.indicator.hidden = YES;
 				[fileCell.indicator stopAnimating];

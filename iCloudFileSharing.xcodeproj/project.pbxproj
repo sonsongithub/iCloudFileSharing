@@ -19,6 +19,7 @@
 		1419AF2614AB183100CBD64B /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2514AB183100CBD64B /* DetailViewController.m */; };
 		1419AF2D14AB355700CBD64B /* FileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2C14AB355700CBD64B /* FileInfo.m */; };
 		1419AF3014AB363900CBD64B /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1419AF2F14AB363900CBD64B /* FileCell.m */; };
+		149B86E614B9D5AD0038C08C /* NSMetadataItem+sonson.m in Sources */ = {isa = PBXBuildFile; fileRef = 149B86E514B9D5AD0038C08C /* NSMetadataItem+sonson.m */; };
 		14FEB7AD14AC1EE70096174B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB7AB14AC1EE70096174B /* Default.png */; };
 		14FEB7AE14AC1EE70096174B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14FEB7AC14AC1EE70096174B /* Default@2x.png */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,8 @@
 		1419AF2E14AB363900CBD64B /* FileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
 		1419AF2F14AB363900CBD64B /* FileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
 		1419AF3114AB39A400CBD64B /* iCloudFileSharing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iCloudFileSharing.entitlements; sourceTree = "<group>"; };
+		149B86E414B9D5AD0038C08C /* NSMetadataItem+sonson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMetadataItem+sonson.h"; sourceTree = "<group>"; };
+		149B86E514B9D5AD0038C08C /* NSMetadataItem+sonson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMetadataItem+sonson.m"; sourceTree = "<group>"; };
 		14FEB7AB14AC1EE70096174B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		14FEB7AC14AC1EE70096174B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +106,8 @@
 				1419AF1B14AAFEEA00CBD64B /* FileIndexViewController.m */,
 				1419AF2114AB17D300CBD64B /* NewFileViewController.h */,
 				1419AF2214AB17D300CBD64B /* NewFileViewController.m */,
+				149B86E414B9D5AD0038C08C /* NSMetadataItem+sonson.h */,
+				149B86E514B9D5AD0038C08C /* NSMetadataItem+sonson.m */,
 				1419AF2414AB183100CBD64B /* DetailViewController.h */,
 				1419AF2514AB183100CBD64B /* DetailViewController.m */,
 				1419AF0C14AAFEAD00CBD64B /* AppDelegate.h */,
@@ -205,6 +210,7 @@
 				1419AF2614AB183100CBD64B /* DetailViewController.m in Sources */,
 				1419AF2D14AB355700CBD64B /* FileInfo.m in Sources */,
 				1419AF3014AB363900CBD64B /* FileCell.m in Sources */,
+				149B86E614B9D5AD0038C08C /* NSMetadataItem+sonson.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
