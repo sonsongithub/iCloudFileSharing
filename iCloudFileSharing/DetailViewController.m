@@ -32,6 +32,8 @@
 
 #import "FileInfo.h"
 
+#import "NSFileVersion+sonson.h"
+
 @implementation DetailViewController
 
 @synthesize textView = _textView;
@@ -190,27 +192,56 @@
 									options:NSFileCoordinatorReadingWithoutChanges
 									  error:&error
 								 byAccessor:^(NSURL *readingURL) {
+									 NSError *error = nil;
+									 
+									 // buffer for merging
 									 NSMutableString *string = [NSMutableString string];
+									 
+									 // fetch versions
 									 NSArray *unresolvedVersions = [NSFileVersion unresolvedConflictVersionsOfItemAtURL:readingURL];
+									 if ([unresolvedVersions count]== 0) {
+										 NSLog(@"This URL has no unresolved conflict versions.");
+										 self.textView.text = [NSString stringWithContentsOfURL:[[NSFileVersion currentVersionOfItemAtURL:readingURL] URL] encoding:NSUTF8StringEncoding error:nil];
+										 return;
+									 }
+									 
+									 // dump all versions
+									 [NSFileVersion dumpAllVersionsAtURL:self.info.URL];
+									 
+									 // merge all versions.
 									 for (NSFileVersion *version in unresolvedVersions) {
 										 NSError *error = nil;
 										 version.resolved = YES;
-										 NSLog(@"%@", version);
 										 NSString *otherVersionString = [NSString stringWithContentsOfURL:[version URL] 
 																								 encoding:NSUTF8StringEncoding 
 																									error:&error];
-										 NSLog(@"%@", otherVersionString);
 										 [string appendString:otherVersionString];
 									 }
-									 NSError *error = nil;
+									 
+									 // remove all other version excepting the current version.
 									 [NSFileVersion removeOtherVersionsOfItemAtURL:readingURL error:&error];
-									 if (error) {
+									 if (error)
 										 NSLog(@"Removing other versions Error = %@", [error localizedDescription]);
-									 }
-									 else {
-										 NSLog(@"Removing other versions OK = %@", readingURL); 
-									 }
+									 else
+										 NSLog(@"Removing other versions OK = %@", readingURL);
+									 
+									 // append current version's content
 									 [string appendString:[NSString stringWithContentsOfURL:[[NSFileVersion currentVersionOfItemAtURL:readingURL] URL] encoding:NSUTF8StringEncoding error:nil]];
+									 
+									 // write the new merged file.
+									 [coordinator coordinateWritingItemAtURL:self.info.URL
+																	 options:NSFileCoordinatorWritingForReplacing
+																	   error:&error
+																  byAccessor:^(NSURL *newURL) {
+																	  NSError *error = nil;
+																	  NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
+																	  [data writeToURL:newURL options:0 error:&error];
+																	  
+																	  if (error)
+																		  NSLog(@"Writing Error = %@", [error localizedDescription]);
+																	  else
+																		  NSLog(@"Writing OK = %@", newURL);
+																  }];
 									 self.textView.text = string;
 								 }];
 }

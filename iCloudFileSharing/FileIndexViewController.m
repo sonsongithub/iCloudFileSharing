@@ -180,6 +180,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	[self.query disableUpdates];
 	[self.query stopQuery];
 }
 
