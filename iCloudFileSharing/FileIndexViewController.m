@@ -88,17 +88,19 @@
 		NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
 		
 		if ([downloadedKey boolValue]) {
+			NSLog(@" ->Already downloading");
 		}
 		else {
 			if ([downloadingKey boolValue]) {
+				NSLog(@" ->Now downloading");
 			}
 			else {
 				NSError *error = nil;
 				[[NSFileManager defaultManager] startDownloadingUbiquitousItemAtURL:info.URL error:&error];
 				if (error)
-					NSLog(@"Can't start downloading - %@", [error localizedDescription]);
+					NSLog(@" ->Can't start downloading - %@", [error localizedDescription]);
 				else {
-					NSLog(@"Start downloading");
+					NSLog(@" ->Start downloading");
 				}
 			}
 		}
@@ -156,6 +158,8 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIApplicationDidEnterBackgroundNotification:) name:UIApplicationDidEnterBackgroundNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UIApplicationWillEnterForegroundNotification:) name:UIApplicationWillEnterForegroundNotification object:nil];
+	
+	[NSTimer scheduledTimerWithTimeInterval:1 target:self.tableView selector:@selector(reloadData) userInfo:nil repeats:YES];
 }
 
 - (void)UIApplicationDidEnterBackgroundNotification:(NSNotification*)notification {
@@ -265,16 +269,19 @@
 		cell.textLabel.text = info.title;
 		
 		if (info.metadataItem) {
-			NSNumber *downloadedKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadedKey];
-			NSNumber *downloadingKey = [info.metadataItem valueForAttribute:NSMetadataUbiquitousItemIsDownloadingKey];
+			NSNumber *isDownloaded = nil;
+			NSNumber *isDownloading = nil;
+			NSError *error = nil;
+			[[info.metadataItem valueForAttribute:NSMetadataItemURLKey] getResourceValue:&isDownloaded forKey:NSURLUbiquitousItemIsDownloadedKey error:&error];
+			[[info.metadataItem valueForAttribute:NSMetadataItemURLKey] getResourceValue:&isDownloading forKey:NSURLUbiquitousItemIsDownloadingKey error:&error];
 			
-			if ([downloadedKey boolValue]) {
+			if ([isDownloaded boolValue]) {
 				fileCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 				fileCell.indicator.hidden = YES;
 				[fileCell.indicator stopAnimating];
 			}
 			else {
-				if ([downloadingKey boolValue]) {
+				if ([isDownloading boolValue]) {
 					fileCell.accessoryType = UITableViewCellAccessoryNone;
 					fileCell.indicator.hidden = NO;
 					[fileCell.indicator startAnimating];
